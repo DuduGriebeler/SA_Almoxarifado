@@ -10,16 +10,16 @@ async function listarEquipamentos() {
         tabela.innerHTML = "";
 
         dados.forEach(equipamento => {
-            tabela.innerHTML += 
-            `<tr>
+            tabela.innerHTML +=
+                `<tr>
                 <td>${equipamento.id}</td>
                 <td>${equipamento.nome}</td>
                 <td>${equipamento.marca}</td>
                 <td>${equipamento.patrimonio}</td>
 
                 <td>
-                    <button class="btn btn-warning btn-sm">Editar</button>
-                    <button class="btn btn-danger btn-sm">Excluir</button>
+                    <button onClick = ""class="btn btn-warning btn-sm">Editar</button>
+                    <button onClick = "excluirEquipamento$(equipamento.id)" class="btn btn-danger btn-sm">Excluir</button>
                 </td>
             </tr>`
         });
@@ -29,13 +29,16 @@ async function listarEquipamentos() {
 };
 
 async function excluirEquipamento(id) {
-    try{
+    try {
         await fetch(`${url}/excluir/${id}`, {
-        method: "delete"
-    });
-    listarEquipamentos()
+            method: "delete"
+        });
+        listarEquipamentos()
     }
 
+    catch (error) {
+        console.log(error);
+    }
 }
 
 listarEquipamentos();
